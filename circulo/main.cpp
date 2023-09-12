@@ -15,6 +15,7 @@ void processInput(GLFWwindow* window);
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+int a=3;
 
 const char* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
@@ -274,7 +275,7 @@ int main()
     // -----------
     while (!glfwWindowShouldClose(window))
     {
-   
+		processInput(window);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -282,25 +283,77 @@ int main()
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glDrawArrays(GL_TRIANGLES, 3, 6);
-        glDrawArrays(GL_TRIANGLES, 6, 9);
-        glDrawArrays(GL_TRIANGLES, 9, 12);
-        glDrawArrays(GL_TRIANGLES, 12, 15);
-        glDrawArrays(GL_TRIANGLES, 15, 18);
-        glDrawArrays(GL_TRIANGLES, 18, 21);
-        glDrawArrays(GL_TRIANGLES, 21, 24);
-        glDrawArrays(GL_TRIANGLES, 24, 27);
-        glDrawArrays(GL_TRIANGLES, 27, 29);
-        glDrawArrays(GL_TRIANGLES, 29, 31);
-        glDrawArrays(GL_TRIANGLES, 31, 33);
-        glDrawArrays(GL_TRIANGLES, 33, 37);
-
-        glDrawArrays(GL_TRIANGLES, 37, 40);
-        glDrawArrays(GL_TRIANGLES, 40, 43);
-        glDrawArrays(GL_TRIANGLES, 43, 46);
         
-        glfwSwapBuffers(window);
+        
+        
+		
+		if(a==0){	
+			//Con GLS_POINTS //                             running
+			glPointSize(10);
+			glDrawArrays(GL_POINTS, 0, 46);
+		}
+		
+		else if(a==1){
+			// CON GLS_LINES //                             running
+			glDrawArrays(GL_LINES, 1, 10);
+			glDrawArrays(GL_LINES, 0, 10);
+		}
+		
+		else if(a==2){
+			// Con GLS_LINE_STRIP //                        running
+			glDrawArrays(GL_LINE_STRIP, 0, 10);
+			glDrawArrays(GL_LINE_STRIP, 1, 10);
+		}
+		
+		else if(a==3){
+			// Con GL_TRIANGLE //                           Running
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+			glDrawArrays(GL_TRIANGLES, 3, 6);
+			glDrawArrays(GL_TRIANGLES, 6, 9);
+			
+			glDrawArrays(GL_TRIANGLES, 9, 12);
+			glDrawArrays(GL_TRIANGLES, 12, 15);
+			glDrawArrays(GL_TRIANGLES, 15, 18);
+			
+			glDrawArrays(GL_TRIANGLES, 18, 21);
+			glDrawArrays(GL_TRIANGLES, 21, 24);
+			glDrawArrays(GL_TRIANGLES, 24, 27);
+		
+			glDrawArrays(GL_TRIANGLES, 27, 29);
+			glDrawArrays(GL_TRIANGLES, 29, 31);
+			glDrawArrays(GL_TRIANGLES, 31, 33);
+			
+			glDrawArrays(GL_TRIANGLES, 33, 37);
+			glDrawArrays(GL_TRIANGLES, 37, 40);
+			glDrawArrays(GL_TRIANGLES, 40, 43);
+		
+			glDrawArrays(GL_TRIANGLES, 43, 46);
+		}
+		
+		else{
+        // Con GL_LINE_LOOP
+			glDrawArrays(GL_LINE_LOOP, 0, 3);
+			glDrawArrays(GL_LINE_LOOP, 3, 6);
+			glDrawArrays(GL_LINE_LOOP, 6, 9);
+			
+			glDrawArrays(GL_LINE_LOOP, 9, 12);
+			glDrawArrays(GL_LINE_LOOP, 12, 15);
+			glDrawArrays(GL_LINE_LOOP, 15, 18);
+			
+			glDrawArrays(GL_LINE_LOOP, 18, 21);
+			glDrawArrays(GL_LINE_LOOP, 21, 24);
+			glDrawArrays(GL_LINE_LOOP, 24, 27);
+		
+			glDrawArrays(GL_LINE_LOOP, 27, 29);
+			glDrawArrays(GL_LINE_LOOP, 29, 31);
+			glDrawArrays(GL_LINE_LOOP, 31, 33);
+			
+			glDrawArrays(GL_LINE_LOOP, 33, 37);
+			glDrawArrays(GL_LINE_LOOP, 37, 40);
+			glDrawArrays(GL_LINE_LOOP, 40, 43);
+		
+			glDrawArrays(GL_LINE_LOOP, 43, 46);
+		}
 
 
 
@@ -326,11 +379,22 @@ int main()
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow* window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-}
+void processInput(GLFWwindow* window){
+		
+		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, true);
+		//////////////////////////////////////////////////////////////////////////////////////
+		if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+			a=0;
+		if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
+			a=1;
+		if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			a=2;
+		if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+			a=3;
+		if(glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+			a=4;
+	}
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
