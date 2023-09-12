@@ -17,6 +17,7 @@ void processInput(GLFWwindow* window);
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+int a=0;
 
 const char* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
@@ -114,13 +115,16 @@ int main()
 
         -0.65f, -0.85f, 0.0f,    //A 0
         -0.45f,  -0.15f, 0.0f,   //B 1
-        -1.05f,  0.3f, 0.0f,     //C 2
+        -1.05f,  0.3f, 0.0f,		//C 2
+		
         -0.25f,  0.3f, 0.0f,     //D-3
         0.0f, 1.0f, 0.0f,       //E 4
         0.25f,  0.3f, 0.0f,      //F-5
+		
         1.05f,  0.3f, 0.0f,     //G 6
          0.45f,  -0.15f, 0.0f,   //H-7
         0.65f, -0.85f, 0.0f,    //I 8
+		
         0.0f,  -0.45f, 0.0f,    //J-9 
         -0.65f, -0.85f, 0.0f,    //A 10
          0.0f,  -0.45f, 0.0f,    //J-9 
@@ -182,30 +186,37 @@ int main()
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
       
-
+		
        
+	   
+		if(a==0){	
         //Con GLS_POINTS //                             running
-       // glDrawArrays(GL_POINTS, 0, 10);
-
+			glPointSize(10);
+			glDrawArrays(GL_POINTS, 0, 10);
+		}
+		
+		else if(a==1){
         // CON GLS_LINES //                             running
-
-        //glDrawArrays(GL_LINES, 1, 10);
-        //glDrawArrays(GL_LINES, 0, 10);
-
+			glDrawArrays(GL_LINES, 1, 10);
+			glDrawArrays(GL_LINES, 0, 10);
+		}
+		
+		else if(a==2){
         // Con GLS_LINE_STRIP //                        running
-        //glDrawArrays(GL_LINE_STRIP, 0, 10);
-        //glDrawArrays(GL_LINE_STRIP, 1, 10);
-
+			glDrawArrays(GL_LINE_STRIP, 0, 10);
+			glDrawArrays(GL_LINE_STRIP, 1, 10);
+		}
+		
+		else if(a==3){
         // Con GL_TRIANGLE //                           Running
-        //glDrawArrays(GL_TRIANGLES, 12,21);
-
+        glDrawArrays(GL_TRIANGLES, 12,21);
+		}
+		
+		else{
         // Con GL_LINE_LOOP
-       glDrawArrays(GL_LINE_LOOP, 0, 10);
-       
-        //glPointSize(10);
-        //glDrawArrays(GL_POINTS, 0,10 );
-
-        
+			glDrawArrays(GL_LINE_LOOP, 0, 10);
+		}
+    
 
 
         // glBindVertexArray(0); // no need to unbind it every time 
@@ -234,6 +245,16 @@ void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+	if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+		a=0;
+	if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
+		a=1;
+	if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		a=2;
+	if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+		a=3;
+	if(glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+		a=4;
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
